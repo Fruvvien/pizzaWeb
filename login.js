@@ -3,9 +3,6 @@ let loginEventListener= document.getElementById("loginEventListener");
 
 loginEventListener.addEventListener("submit", (e) =>{
     
-    e.preventDefault();
-    
-    
     let email=document.getElementById("email").value;
     let password=document.getElementById("password").value;
     let allDatas;
@@ -15,11 +12,9 @@ loginEventListener.addEventListener("submit", (e) =>{
             passw: password
         }
     }else{
-        "írjon be adatokat";
+       alert ("írjon be adatokat");
     }
     
-
-
 
 $.ajax({
 
@@ -31,12 +26,11 @@ $.ajax({
     success: function(response){
         let result = JSON.parse(response);
         if(result["success"]){
-            if(result["loginData"]["user_type"]){
+            if(result["loginData"]["user_type"] == 1){
                 document.getElementById("adminNav").style.display="block";
                 document.getElementById("loginEventListener").style.display="none";
-            }else if(!result["loginData"]["user_type"]){
-                
-                document.getElementById("adminNav").style.display="block";
+            }else if(result["loginData"]["user_type"] == 0){
+                document.getElementById("user").style.display="block";
                 document.getElementById("loginEventListener").style.display="none";
             }
         }else{
