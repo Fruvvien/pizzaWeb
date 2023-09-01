@@ -46,3 +46,14 @@ if(isset($_POST["action"]) && $_POST["action"] == "logoutAdmin" ){
    echo true;
   
 }
+
+if(isset($_POST["action"]) && $_POST["action"] == "register" && isset($_POST["allRegisterDataKey"])){
+   $queriesRegister = $queries->registerFunction($_POST["allRegisterDataKey"]["username"], $_POST["allRegisterDataKey"]["email"], $_POST["allRegisterDataKey"]["password"]);
+   if($queriesRegister["success"]){
+      echo json_encode (["success" => true, "loginData" => $queriesRegister, "errorMessage" => ""]);
+   }else{
+      echo json_encode (["success" => false, "loginData" => [], "errorMessage" => $queriesRegister["errorMessage"]]);
+   }
+  
+   
+}
