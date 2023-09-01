@@ -31,7 +31,7 @@
 
         <!-- Register buttons -->
         <div class="text-center">
-            <p><a href="#!">Regisztráció</a></p>
+            <p><a aria-current="page" href="?page=register">Regisztráció</a></p>
         </div>
     </form>
 </div>
