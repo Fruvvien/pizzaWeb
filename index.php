@@ -1,6 +1,6 @@
 <?php
 session_start();
-print_r($_SESSION);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,7 +65,9 @@ print_r($_SESSION);
     <?php
        if(isset($_GET["page"])){
             switch($_GET["page"]){
-
+              case "register":
+                include "register.php";
+                break;
 
              default;
             }
