@@ -24,6 +24,7 @@ function sessionExist(){
                     document.getElementById("loginEventListener").style.display="none";
                 }
             }else{
+                
                 document.getElementById("loginEventListener").style.display="block";
                 document.getElementById("user").style.display="none";
                 document.getElementById("adminNav").style.display="none";
