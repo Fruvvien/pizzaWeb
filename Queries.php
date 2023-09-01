@@ -23,5 +23,19 @@ class Queries{
         }
     }
 
+    function registerFunction($username, $email, $password){
+        try{
+            $sql = $this->db->conn->prepare("INSERT INTO users (user_name, email, password, user_type) VALUES (:username, :email, :password, 0)");
+            $sql->bindValue(":username", $username);
+            $sql->bindValue(":email", $email);
+            $sql->bindValue(":password", $password);
+            $sql->execute();
+            $result = $sql;
+            return ["success" => true, "errorMessage" => "", "result" => $result];
+        }catch (PDOExpection $e){
+            return ["success" => false, "errorMessage" => "$e", "result" => []];
+        }
+    }
+
 
 }
