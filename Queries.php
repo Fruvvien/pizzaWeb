@@ -37,5 +37,14 @@ class Queries{
         }
     }
 
+    function cookiesFunction($emails){
+        $sql=$this->db->conn->prepare("SELECT * FROM users WHERE email = :email ");
+        $sql->bindValue(":email", $emails);
+        $sql->execute();
+        $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+
+    }
+
 
 }
