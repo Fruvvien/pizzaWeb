@@ -1,6 +1,6 @@
 <?php
 session_start();
-print_r($_SESSION);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +47,7 @@ print_r($_SESSION);
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">Pizzák</a>
+          <a class="nav-link" aria-current="page" href="?page=pizza">Pizzák</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="#">Futárok</a>
@@ -67,6 +67,9 @@ print_r($_SESSION);
             switch($_GET["page"]){
               case "register":
                 include "register.php";
+                break;
+              case "pizza":
+                include "pizza.php";
                 break;
 
              default;
