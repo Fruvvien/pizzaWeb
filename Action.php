@@ -37,12 +37,16 @@ if(isset($_POST["action"]) && $_POST["action"] == "sessionExist"){
 
 if(isset($_POST["action"]) && $_POST["action"] == "logoutUser"){
    session_destroy();
+   $cooki_name = "email";
+   setcookie($cooki_name, "", time() - (86400 * 30));
    echo true;
      
 }
 
 if(isset($_POST["action"]) && $_POST["action"] == "logoutAdmin" ){
    session_destroy();
+   $cooki_name = "email";
+   setcookie($cooki_name, "", time() - (86400 * 30));
    echo true;
   
 }
@@ -56,4 +60,22 @@ if(isset($_POST["action"]) && $_POST["action"] == "register" && isset($_POST["al
    }
   
    
+}
+
+if(isset($_POST["action"]) && $_POST["action"] == "checkBox" && isset($_POST["cookiesDataKey"])){
+   $queriesCookies= $queries->cookiesFunction($_POST["cookiesDataKey"]);
+   $cooki_name = "email";
+   $cooki_value = $_POST["cookiesDataKey"];
+   
+   setcookie($cooki_name, $cooki_value, time() + (86400 * 30), "/");
+   if(isset($_COOKIE[$cooki_name])){
+      echo $queriesCookies= $queries[0]["user_type"];
+   }
+  
+}
+
+if(isset($_POST["action"]) && $_POST["action"] == "cookiesExist" && count($_COOKIE) > 0){
+   $cooki_name = "email";
+   unset($_COOKIE[$cooki_name]); 
+   setcookie($cooki_name, '', -1, '/'); 
 }
