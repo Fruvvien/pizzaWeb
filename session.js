@@ -5,7 +5,7 @@ $(document).ready(function() {
 
 
 function sessionExist(){
-     
+     let loginEventListener=document.getElementById("loginEventListener");
     $.ajax({
 
         url:"Action.php",
@@ -18,10 +18,15 @@ function sessionExist(){
             if(result["sessionIsNotExist"]){
                 if(result["usertype"]){
                     document.getElementById("adminNav").style.display="block";
-                    document.getElementById("loginEventListener").style.display="none";
+                    if(loginEventListener != undefined){
+                        document.getElementById("loginEventListener").style.display="none";
+                    }
+                    
                 }else{
                     document.getElementById("user").style.display="block";
-                    document.getElementById("loginEventListener").style.display="none";
+                    if(loginEventListener != undefined){
+                        document.getElementById("loginEventListener").style.display="none";
+                    }
                 }
             }else{
                 
@@ -48,7 +53,7 @@ logoutSessionUser.addEventListener("click", (e) =>{
 
         success: function(response){
            if(response){
-            document.getElementById("loginEventListener").style.display="block";
+            window.location.href="http://localhost/feladatok/pizzaWeb/";
             document.getElementById("user").style.display="none";
             document.getElementById("adminNav").style.display="none";
            }
@@ -70,7 +75,7 @@ logoutSessionAdmin.addEventListener("click", (e) =>{
 
         success: function(response){
            if(response){
-            document.getElementById("loginEventListener").style.display="block";
+            window.location.href="http://localhost/feladatok/pizzaWeb/";
             document.getElementById("user").style.display="none";
             document.getElementById("adminNav").style.display="none";
            }
