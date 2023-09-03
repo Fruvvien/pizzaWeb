@@ -46,5 +46,12 @@ class Queries{
 
     }
 
+    function pizzaFunction(){
+        $sql= $this->db->conn->prepare("SELECT * FROM pizzak");
+        $sql->execute();
+        $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
 
 }
