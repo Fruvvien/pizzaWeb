@@ -79,3 +79,8 @@ if(isset($_POST["action"]) && $_POST["action"] == "cookiesExist" && count($_COOK
    unset($_COOKIE[$cooki_name]); 
    setcookie($cooki_name, '', -1, '/'); 
 }
+
+if(isset($_POST["action"]) && $_POST["action"] == "pizzaAction"){
+   echo json_encode($queries->pizzaFunction());
+
+}
