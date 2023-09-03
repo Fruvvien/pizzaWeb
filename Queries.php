@@ -47,7 +47,7 @@ class Queries{
     }
 
     function pizzaFunction(){
-        $sql= $this->db->conn->prepare("SELECT * FROM pizzak");
+        $sql= $this->db->conn->prepare("SELECT * FROM pizzak LEFT JOIN pizzak_url ON(pizzak.pazon = pizzak_url.product_id)");
         $sql->execute();
         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
         return $result;
