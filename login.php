@@ -17,8 +17,8 @@
             <div class="col d-flex justify-content-center">
             <!-- Checkbox -->
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="check_value" id="check" name="check" checked />
-                <label class="form-check-label" for="form2Example31"> Emlékez rám </label>
+                <input class="form-check-input"  type="checkbox" value="check_value" id="check" name="check" checked />
+                <label class="form-check-label" for="check"> Emlékez rám </label>
             </div>
             </div>
 
@@ -38,3 +38,4 @@
 
 
 <script src="login.js"></script>
+<script>src="cookie.js"</script>

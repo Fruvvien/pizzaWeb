@@ -2,9 +2,11 @@
 let loginEventListener= document.getElementById("loginEventListener");
 
 loginEventListener.addEventListener("submit", (e) =>{
+
     
-    let email=document.getElementById("email").value;
-    let password=document.getElementById("password").value;
+    email=document.getElementById("email").value;
+    password=document.getElementById("password").value;
+
     let allDatas;
     if(email != "" && password != ""){
         allDatas={
@@ -44,4 +46,50 @@ $.ajax({
 
     });
 
+
+    let checkValue= document.getElementById("check");
+   
+    if(checkValue.checked){
+        $.ajax({
+            url: "Action.php",
+            type: "POST",
+            data: {action: "checkBox", cookiesDataKey: email},
+    
+            success: function(response){
+                if(response){
+                    document.getElementById("adminNav").style.display="block";
+                    document.getElementById("loginEventListener").style.display="none";
+                }else{
+                    document.getElementById("user").style.display="block";
+                    document.getElementById("loginEventListener").style.display="none";
+                }
+                
+            },
+            error: function(xhr, status, error){
+    
+            },
+    
+        });
+    }else{
+        $.ajax({
+            url: "Action.php",
+            type: "POST",
+            data: {action: "cookiesExist"},
+    
+            success: function(response){
+                
+            },
+            error: function(xhr, status, error){
+    
+            },
+    
+        });
+    }
+   
+
 })
+
+
+
+    
+    
