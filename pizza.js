@@ -18,12 +18,13 @@ function pizzaPage(){
             let pizzak="";
             arrayParse.forEach(datas => {
                 pizzak+=
-                "<div class='card text-white bg-secondary mb-2 '>"+
-                "<div style='text-align: center' >"+datas.pnev+"</div>"+
-                "<div style='text-align: center' class='card-body'  >" +
-                "<img style='background-color: white' id='pizzaImg' src='./"+datas.url+datas.filename+"."+datas.filetype+"'>"+
-                "</div>"+
-                "<div style='text-align: center' >"+datas.par+"</div>"+
+                "<div class='card text-white mb-2 '>"+                    
+                    "<div class='card-body'>" +
+                        "<div> <h4>"+datas.pnev+"</h4></div>"+
+                        "<img id='pizzaImg' src='./"+datas.url+datas.filename+"."+datas.filetype+"'>"+
+                    "</div>"+
+                    
+                    "<button id='cardButton' onclick='orderFunction("+datas.pazon+")' >"+datas.par+"FT"+"</button>"+
                 "</div>"
             });
             document.getElementById("pizza").innerHTML=pizzak;
@@ -33,5 +34,11 @@ function pizzaPage(){
         }
 
     })
+
+}
+
+function orderFunction(pizzaId){
+
+
 
 }
