@@ -1,4 +1,28 @@
 #pizzaImg{
-    width: 130px;
-    height: 130px;
+    width: 200px;
+    height: 200px;
+}
+#pizza{
+    display: flex;
+    flex-flow: row wrap;
+    gap: 30px;
+}
+.card{
+    display: flex;
+    justify-content: center;
+    border: none;
+    margin: 20px;
+    width: 400px;
+    height: 200px;
+}
+.card-body{
+    display: flex;
+    align-items: center;
+    color: black;
+}
+#cardButton{
+    border: none;
+    border-radius: 20px;
+    background-color: rgb(6, 97, 97);
+    color: white;
 }
