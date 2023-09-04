@@ -58,12 +58,20 @@ session_start();
               <button class="nav-link" aria-current="page" id="logoutUser" >Kijelentkezés</button>
         </li>
       </ul>
+      <ul class="navbar-nav ml-auto" >
+          <li class="nav-item">
+              <button class="nav-link" aria-current="page" href="?page=order" id="order" >Rendelés
+              <span class="top-1 start-100 translate-middle badge rounded-pill bg-danger id=counting"></span>
+              </button>
+          </li>
+      </ul>
     
     </div>
   </div>
 </nav>
 
 <div class ="container-fluid">
+  <div class="row">
     <?php
        if(isset($_GET["page"])){
             switch($_GET["page"]){
@@ -73,6 +81,10 @@ session_start();
               case "pizza":
                 include "pizza.php";
                 break;
+              case "order": 
+                include "order.php";
+                break;
+
 
              default;
             }
@@ -82,6 +94,7 @@ session_start();
 
 
     ?>
+  </div>
 </div>
 </body>
 <script src="session.js"></script>
