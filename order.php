@@ -2,4 +2,4 @@
 
 </div>
 
-<script src="order.js"></script>
+<script src="./java/order.js"></script>

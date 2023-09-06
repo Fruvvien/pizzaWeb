@@ -56,4 +56,4 @@
 
 </div>
 
-<script src="register.js"></script>
+<script src="./java/register.js"></script>
