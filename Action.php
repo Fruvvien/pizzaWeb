@@ -84,3 +84,6 @@ if(isset($_POST["action"]) && $_POST["action"] == "pizzaAction"){
    echo json_encode($queries->pizzaFunction());
 
 }
+if(isset($_POST["action"]) && $_POST["action"] == "courierlist"){
+   echo json_encode($queries->courierFunction());
+}

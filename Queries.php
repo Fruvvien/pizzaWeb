@@ -52,6 +52,12 @@ class Queries{
         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+    function courierFunction(){
+        $sql = $this->db->conn->prepare("SELECT * FROM futar");
+        $sql->execute();
+        $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
 
 }
