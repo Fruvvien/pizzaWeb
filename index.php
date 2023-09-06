@@ -11,6 +11,7 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <link rel="stylesheet" href="./css/pizza.css">
+    <link rel="stylesheet" href="./css/courier.css">
     <title>Document</title>
     
 </head>
@@ -52,7 +53,7 @@ session_start();
           <a class="nav-link" aria-current="page" href="?page=pizza">Pizzák</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">Futárok</a>
+          <a class="nav-link" aria-current="page" href="?page=courier">Futárok</a>
         </li>
         <li class="nav-item">
               <button class="nav-link" aria-current="page" id="logoutUser" >Kijelentkezés</button>
@@ -84,6 +85,9 @@ session_start();
               case "order": 
                 include "order.php";
                 break;
+              case  "courier":
+                include "courier.php";
+                break; 
 
 
              default;

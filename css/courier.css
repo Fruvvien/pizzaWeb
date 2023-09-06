@@ -1,0 +1,18 @@
+#courier{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    
+    
+}
+#courierList{
+   background-color:aqua ;
+   border-radius: 12px;
+   
+}
+#courierList{
+    border: 2px solid black;
+}
+#courierList:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
