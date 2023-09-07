@@ -87,3 +87,12 @@ if(isset($_POST["action"]) && $_POST["action"] == "pizzaAction"){
 if(isset($_POST["action"]) && $_POST["action"] == "courierlist"){
    echo json_encode($queries->courierFunction());
 }
+
+if(isset($_POST["action"]) && $_POST["action"] == "order" && isset($_POST["pizzaKey"])){
+   $orderQueries = $queries->orderFunction($_POST["pizzaKey"]["pizzaId"], $_POST["pizzaKey"]["pizzaName"], $_POST["pizzaKey"]["pizzaAr"]);
+   if($orderQueries){
+      return json_encode(["success" => true]);
+   }else{
+      return json_encode(["success" => false, "errorMessage" => strval($orderQueries)]);
+   }
+}
