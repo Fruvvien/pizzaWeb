@@ -58,6 +58,15 @@ class Queries{
         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+    
+    function orderFunction($id, $pizzaNev, $pizzaAr){
+        $sql = $this->db->conn->prepare("INSERT INTO orderbag (pizza_azonosito, pizza_nev, pizza_ar) VALUES(:pizzaId, :pizzaNev, :pizzaAr)");
+        $sql->bindValue(":pizzaId", $id);
+        $sql->bindValue(":pizzaaNev", $pizzaNev);
+        $sql->bindValue(":pizzaAr", $pizzaAr);
+        $result =  $sql->execute();
+        return $result;
+    }
 
 
 }
