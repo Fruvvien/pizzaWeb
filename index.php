@@ -12,6 +12,7 @@ session_start();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <link rel="stylesheet" href="./css/pizza.css">
     <link rel="stylesheet" href="./css/courier.css">
+    
     <title>Document</title>
     
 </head>
@@ -61,9 +62,9 @@ session_start();
       </ul>
       <ul class="navbar-nav ml-auto" >
           <li class="nav-item">
-              <button class="nav-link" aria-current="page" href="?page=order" id="order" >Rendelés
-              <span class="top-1 start-100 translate-middle badge rounded-pill bg-danger id=counting"></span>
-              </button>
+              <a class="nav-link" aria-current="page" href="?page=order" id="order" >Rendelés
+                <span class="top-1 start-100 translate-middle badge rounded-pill bg-danger id=counting"></span>
+              </a>
           </li>
       </ul>
     
