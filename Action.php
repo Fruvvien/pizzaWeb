@@ -13,8 +13,9 @@ if(isset($_POST["action"]) && $_POST["action"] == "login" && isset($_POST["allDa
 
 
 if($queriesLogin["success"] && $queriesLogin != ""){
-   if(!isset($_SESSION["usertype"])){
+   if(!isset($_SESSION["usertype"]) ){
       $_SESSION["usertype"] = $queriesLogin["result"][0]["user_type"];
+      $_SESSION["userId"] = $queriesLogin["result"][0]["id"];
    }
       echo json_encode(["success" => true, "loginData" => $queriesLogin, "errorMessage" => ""]);
 }else{
@@ -88,11 +89,16 @@ if(isset($_POST["action"]) && $_POST["action"] == "courierlist"){
    echo json_encode($queries->courierFunction());
 }
 
-if(isset($_POST["action"]) && $_POST["action"] == "order" && isset($_POST["pizzaKey"])){
-   $orderQueries = $queries->orderFunction($_POST["pizzaKey"]["pizzaId"], $_POST["pizzaKey"]["pizzaName"], $_POST["pizzaKey"]["pizzaAr"]);
-   if($orderQueries){
-      return json_encode(["success" => true]);
-   }else{
-      return json_encode(["success" => false, "errorMessage" => strval($orderQueries)]);
-   }
+if(isset($_POST["action"]) && $_POST["action"] == "order" && isset($_POST["pizzaKey"]) && isset($_SESSION["userId"])){
+   $orderQueries = $queries->userIdFunction($_SESSION["userId"]);
+   $existProduct = $queries->productFunction($_POST["pizzaKey"]["pizzaId"], $_POST["pizzaKey"]["pizzaAr"], $orderQueries);
+   $upgradeCart = $queries->upgradeCartFunction( $_POST["pizzaKey"]["pizzaAr"], $orderQueries, $_SESSION["userId"] );
+   
+   echo json_encode($orderQueries);
+
+  
+}
+
+if(isset($_POST["action"]) && $_POST["action"] == "count" ){
+  echo $queries->summFunction();
 }

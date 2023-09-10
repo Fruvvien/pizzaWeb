@@ -63,7 +63,7 @@ session_start();
       <ul class="navbar-nav ml-auto" >
           <li class="nav-item">
               <a class="nav-link" aria-current="page" href="?page=order" id="order" >Rendelés
-                <span class="top-1 start-100 translate-middle badge rounded-pill bg-danger id=counting"></span>
+                <span class="top-1 start-100 translate-middle badge rounded-pill bg-danger " id=counting></span>
               </a>
           </li>
       </ul>
@@ -102,6 +102,6 @@ session_start();
   </div>
 </div>
 </body>
-<script src="./java/session.js"></script>
+<script src="./js/session.js"></script>
 
 </html>

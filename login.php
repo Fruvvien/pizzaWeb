@@ -37,5 +37,5 @@
 </div>
 
 
-<script src="./java/login.js"></script>
-<script>src="./java/cookie.js"</script>
+<script src="./js/login.js"></script>
+<script>src="./js/cookie.js"</script>

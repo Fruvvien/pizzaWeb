@@ -3,4 +3,4 @@
 
 </div>
 
-<script src="./java/courier.js"></script>
+<script src="./js/courier.js"></script>

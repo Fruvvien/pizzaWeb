@@ -3,4 +3,4 @@
 
 </div>
 
-<script src="./java/pizza.js"></script>
+<script src="./js/pizza.js"></script>
