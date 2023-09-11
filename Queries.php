@@ -109,9 +109,10 @@ class Queries{
         
     }
     function summFunction(){
-        $sql = $this->db->conn->prepare("SELECT SUM(quantity) as counting FROM cart_items CI INNER JOIN cart C ON (CI.cart_id = C.cart_id) GROUP BY C.user_id, CI.product_id, CI:quantity ORDER BY counting DESC");
-        $result = $sql->execute();
-        return $result;
+        $sql = $this->db->conn->prepare("SELECT SUM( CI.quantity) as counting FROM cart_items CI INNER JOIN cart C ON (CI.cart_id = C.cart_id) GROUP BY C.cart_id ORDER BY counting DESC");
+        $sql->execute();
+        $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $result[0]["counting"];
     }
 
 

@@ -74,10 +74,8 @@ function orderFunction(pizzaId, pizzaAr){
             data:{action: "count"},
         
             success: function(response){
-                let count = response;
-                console.log(count);
-               
-                document.getElementById("counting").innerHTML=count;
+           
+                document.getElementById("counting").innerHTML=response;
                
         
             },
