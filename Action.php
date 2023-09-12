@@ -102,3 +102,7 @@ if(isset($_POST["action"]) && $_POST["action"] == "order" && isset($_POST["pizza
 if(isset($_POST["action"]) && $_POST["action"] == "count" ){
  echo $queries->summFunction();
 }
+
+if(isset($_POST["action"]) && $_POST["action"] == "orderPage"){
+   echo json_encode($queries->orderlist());
+}
