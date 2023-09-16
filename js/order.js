@@ -16,12 +16,14 @@ function orderList(){
                 let orderBag = JSON.parse(response);
                 orderBag.forEach(text=> {
                     pageList+=
-                    "<div>"+
-                        "<ul id='orderRow'>"+
-                            "<div >"+text.pnev+"</div>" +
-                            "<div >" +text.quantity+"</div>"+
-                            "<div >"+text.price+"</div>"+
-                        "</ul>"
+                    "<div class='main'>"+
+                        "<ol>"+
+                            "<li id='orderRow'>"+
+                                "<div >"+text.pnev+"</div>" +
+                                "<div >" +text.quantity+"</div>"+
+                                "<div >"+text.price+"</div>"+
+                            "</li>"
+                        "</ol>"
                     "</div>"
                 });
                 document.getElementById("orders").innerHTML=pageList;
