@@ -103,6 +103,11 @@ if(isset($_POST["action"]) && $_POST["action"] == "count" ){
  echo $queries->summFunction();
 }
 
-if(isset($_POST["action"]) && $_POST["action"] == "orderPage"){
-   echo json_encode($queries->orderlist());
+if(isset($_POST["action"]) && $_POST["action"] == "orderPage" ){
+   $queriesOrder=$queries->orderlist();
+   if($queriesOrder[0]["user_id"] == $_SESSION["userId"]){
+      echo json_encode( $queriesOrder);
+   }else{
+      echo false;
+   }
 }
