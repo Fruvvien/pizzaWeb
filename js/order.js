@@ -19,6 +19,7 @@ function orderList(){
                     "<div class='main'>"+
                         "<ol>"+
                             "<li id='orderRow'>"+
+                                "<img id='pizzaImg' src='./"+text.url+text.filename+"."+text.filetype+"'>"+
                                 "<div >"+text.pnev+"</div>" +
                                 "<div >" +text.quantity+"</div>"+
                                 "<div >"+text.price+"</div>"+
