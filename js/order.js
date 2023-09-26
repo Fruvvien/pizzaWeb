@@ -17,14 +17,11 @@ function orderList(){
                 orderBag.forEach(text=> {
                     pageList+=
                     "<div class='main'>"+
-                        "<ol>"+
-                            "<li id='orderRow'>"+
-                                "<img id='pizzaImg' src='./"+text.url+text.filename+"."+text.filetype+"'>"+
-                                "<div >"+text.pnev+"</div>" +
-                                "<div >" +text.quantity+"</div>"+
-                                "<div >"+text.price+"</div>"+
-                            "</li>"
-                        "</ol>"
+                            "<button class='button' onclick='delteFunction("+text.cart_id+")'><img class='buttonImg' src='./img/DeleteButton.png'></button>"+
+                            "<img class='img' id='pizzaImg' src='./"+text.url+text.filename+"."+text.filetype+"'>"+
+                            "<div class='pizzaName' >"+text.pnev+"</div>" +
+                            "<div class='pizzaQuantity'>" +text.quantity+"</div>"+
+                            "<div class='pizzaPrice' >"+text.price+"</div>"+
                     "</div>"
                 });
                 document.getElementById("orders").innerHTML=pageList;

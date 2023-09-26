@@ -66,6 +66,7 @@ session_start();
               <a class="nav-link" aria-current="page" href="?page=order" id="order" >Rendelés
                 <span class="top-1 start-100 translate-middle badge rounded-pill bg-danger " id=counting></span>
               </a>
+              
           </li>
       </ul>
     
