@@ -120,6 +120,20 @@ class Queries{
         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+    function deleteCartItem($id){
+        $sql = $this->db->conn->prepare("DELETE FROM cart_items WHERE cart_items_id = :id");
+        $sql->bindValue(":id", $id);
+        $result =  $sql->execute();
+        return $result;    
+    }
+    function updateCart( $price , $id, $cartItemId){
+        $sql = $this->db->conn->prepare("UPDATE cart SET total_price - :price WHERE cart_id = :id");
+        $sql->bindValue(":cartItemId", $cartItemId);
+        $sql->bindValue(":id", $id);
+        $sql->bindValue(":price", $price);
+        $result = $sql->execute();
+        return $result;
+    }
 
 
 }

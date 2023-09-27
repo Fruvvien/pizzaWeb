@@ -111,3 +111,13 @@ if(isset($_POST["action"]) && $_POST["action"] == "orderPage" ){
       echo false;
    }
 }
+
+if(isset($_POST["action"]) && $_POST["action"] == "deleteFunctionButton" && isset($_POST["cartItemKey"])){
+   $deleteQueries = $queries->deleteCartItem($_POST["cartItemKey"]);
+   echo $deleteQueries;
+}
+
+if(isset($_POST["action"]) && $_POST["action"] == "updateCart" && isset($_POST["cartKey"]) && isset($_POST["cartItemKey"]) && isset($_POST["cartItemPrice"])){
+   $updateCartQueries = $queries->updateCart(  $_POST["cartItemPrice"],  $_POST["cartKey"], $_POST["cartItemKey"]);
+   echo $updateCartQueries;
+}
