@@ -13,6 +13,7 @@ function sessionExist(){
         data: {action: "sessionExist"},
 
         success: function(response){
+           
             let result= JSON.parse(response);
       
             if(result["sessionIsNotExist"]){

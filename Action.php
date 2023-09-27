@@ -70,7 +70,7 @@ if(isset($_POST["action"]) && $_POST["action"] == "checkBox" && isset($_POST["co
    
    setcookie($cooki_name, $cooki_value, time() + (86400 * 30), "/");
    if(isset($_COOKIE[$cooki_name])){
-      echo $queriesCookies= $queries[0]["user_type"];
+      echo $queriesCookies[0]["user_type"];
    }
   
 }
@@ -104,9 +104,9 @@ if(isset($_POST["action"]) && $_POST["action"] == "count" ){
 }
 
 if(isset($_POST["action"]) && $_POST["action"] == "orderPage" ){
-   $queriesOrder=$queries->orderlist();
-   if($queriesOrder[0]["user_id"] == $_SESSION["userId"]){
-      echo json_encode( $queriesOrder);
+   $queriesOrder=$queries->orderlist($_SESSION["userId"]);
+   if(!empty($queriesOrder)){
+      echo json_encode(["queriesOrder" => $queriesOrder ]);
    }else{
       echo false;
    }

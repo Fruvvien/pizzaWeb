@@ -12,9 +12,10 @@ function orderList(){
 
         success: function(response){ 
             let pageList="";
-            if(response && response ){
+            
+            if(response ){
                 let orderBag = JSON.parse(response);
-                orderBag.forEach(text=> {
+                orderBag["queriesOrder"].forEach(text=> {
                     pageList+=
                     "<div class='main'>"+
                             "<button class='button' onclick='deleteFunction("+text.cart_items_id+","+text.cart_id+","+text.price+")'><img class='buttonImg' src='./img/DeleteButton.png'></button>"+

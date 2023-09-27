@@ -114,8 +114,9 @@ class Queries{
         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
         return $result[0]["counting"];
     }
-    function orderlist(){
-        $sql = $this->db->conn->prepare("SELECT * FROM users INNER JOIN cart C  ON (users.id = C.user_id) INNER JOIN cart_items CI  ON (C.cart_id = CI.cart_id) INNER JOIN pizzak ON (CI.product_id = pizzak.pazon)LEFT JOIN pizzak_url ON(pizzak.pazon = pizzak_url.product_id) WHERE C.user_id = users.id");
+    function orderlist($id){
+        $sql = $this->db->conn->prepare("SELECT * FROM users INNER JOIN cart C  ON (users.id = C.user_id) INNER JOIN cart_items CI  ON (C.cart_id = CI.cart_id) INNER JOIN pizzak ON (CI.product_id = pizzak.pazon)LEFT JOIN pizzak_url ON(pizzak.pazon = pizzak_url.product_id) WHERE C.user_id = :id");
+        $sql->bindValue(":id", $id);
         $sql->execute();
         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
         return $result;
@@ -134,6 +135,6 @@ class Queries{
         $result = $sql->execute();
         return $result;
     }
-
+    
 
 }
