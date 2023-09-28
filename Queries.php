@@ -108,8 +108,9 @@ class Queries{
         return $result;
         
     }
-    function summFunction(){
-        $sql = $this->db->conn->prepare("SELECT SUM( CI.quantity) as counting FROM cart_items CI INNER JOIN cart C ON (CI.cart_id = C.cart_id) GROUP BY C.cart_id ORDER BY counting DESC");
+    function summFunction($id){
+        $sql = $this->db->conn->prepare("SELECT SUM( CI.quantity) as counting FROM cart_items CI INNER JOIN cart C ON (CI.cart_id = C.cart_id)WHERE user_id = :id GROUP BY C.cart_id ORDER BY counting DESC ");
+        $sql->bindValue(":id", $id);
         $sql->execute();
         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
         return $result[0]["counting"];
@@ -127,12 +128,20 @@ class Queries{
         $result =  $sql->execute();
         return $result;    
     }
-    function updateCart( $price , $id, $cartItemId){
-        $sql = $this->db->conn->prepare("UPDATE cart SET total_price - :price WHERE cart_id = :id");
-        $sql->bindValue(":cartItemId", $cartItemId);
+    function updateCart( $price, $quantity, $id ){
+        $sql = $this->db->conn->prepare("UPDATE cart SET total_price = total_price - (:price * :quantity) WHERE cart_id = :id");
         $sql->bindValue(":id", $id);
         $sql->bindValue(":price", $price);
+        $sql->bindValue(":quantity", $quantity);
         $result = $sql->execute();
+        return $result;
+    }
+
+    function getTotalPrice($id){
+        $sql = $this->db->conn->prepare("SELECT total_price FROM  cart WHERE user_id = :id");
+        $sql->bindValue(":id", $id);
+        $sql->execute();
+        $result = $sql->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
     

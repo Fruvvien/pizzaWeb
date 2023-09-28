@@ -100,13 +100,14 @@ if(isset($_POST["action"]) && $_POST["action"] == "order" && isset($_POST["pizza
 }
 
 if(isset($_POST["action"]) && $_POST["action"] == "count" ){
- echo $queries->summFunction();
+ echo $queries->summFunction($_SESSION["userId"]);
 }
 
 if(isset($_POST["action"]) && $_POST["action"] == "orderPage" ){
+   $totalPriceQueries = $queries->getTotalPrice($_SESSION["userId"]);
    $queriesOrder=$queries->orderlist($_SESSION["userId"]);
    if(!empty($queriesOrder)){
-      echo json_encode(["queriesOrder" => $queriesOrder ]);
+      echo json_encode(["order" => $queriesOrder, "totalPrice" => $totalPriceQueries]);
    }else{
       echo false;
    }
@@ -117,7 +118,12 @@ if(isset($_POST["action"]) && $_POST["action"] == "deleteFunctionButton" && isse
    echo $deleteQueries;
 }
 
-if(isset($_POST["action"]) && $_POST["action"] == "updateCart" && isset($_POST["cartKey"]) && isset($_POST["cartItemKey"]) && isset($_POST["cartItemPrice"])){
-   $updateCartQueries = $queries->updateCart(  $_POST["cartItemPrice"],  $_POST["cartKey"], $_POST["cartItemKey"]);
+if(isset($_POST["action"]) && $_POST["action"] == "updateCart" && isset($_POST["cartKey"]) && isset($_POST["cartItemPrice"]) && isset($_POST["quantityKey"])){
+   $updateCartQueries = $queries->updateCart( $_POST["cartItemPrice"], $_POST["quantityKey"],$_POST["cartKey"],);
    echo $updateCartQueries;
 }
+
+/* if(isset($_POST["action"]) && $_POST["action"] == "totalPriceAction"){
+   $totalPriceQueries = $queries->getTotalPrice($_SESSION["userId"]);
+   echo json_encode($totalPriceQueries);
+} */
