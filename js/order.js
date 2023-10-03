@@ -48,9 +48,11 @@ function orderList(){
                     
 
                 });
-                pageList+= "<div>"+result["totalPrice"][0].total_price+ "</div>";
+                pageList+= "<div class= 'buttonDiv'>"+
+                            "<button class= 'payButton'>"+result["totalPrice"][0].total_price+ "</button>"+
+                            "</div>";
                 
-        
+                
                 document.getElementById("orders").innerHTML = pageList;
             }else{
                 pageList="üres az orderbag";
