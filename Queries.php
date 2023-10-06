@@ -137,11 +137,20 @@ class Queries{
         return $result;
     }
 
-    function getTotalPrice($id){
-        $sql = $this->db->conn->prepare("SELECT total_price FROM  cart WHERE user_id = :id");
+    function getTotalPriceAndCartId($id){
+        $sql = $this->db->conn->prepare("SELECT total_price, cart_id FROM  cart WHERE user_id = :id");
         $sql->bindValue(":id", $id);
         $sql->execute();
         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    function delteFromCart($id, $userId){
+        $sql = $this->db->conn->prepare("DELETE FROM cart WHERE cart_id = :id AND user_id = :userId");
+        $sql->bindValue(":id", $id);
+        $sql->bindValue(":userId", $userId);
+        $sql->execute();
+        $result = $sql->execute();
         return $result;
     }
     

@@ -49,7 +49,8 @@ function orderList(){
 
                 });
                 pageList+= "<div class= 'buttonDiv'>"+
-                            "<button class= 'payButton'>"+result["totalPrice"][0].total_price+ "</button>"+
+                            
+                            "<button class= 'payButton' onclick='deleteFromCart("+result["cartId"][0].cart_id+")'>"+"Fizetendő ár: "+result["totalPrice"][0].total_price+"FT"+ "</button>"+
                             "</div>";
                 
                 
@@ -106,6 +107,31 @@ function updateCart(cartId, price, quantity){
         error: function(xhr, error, errorMessage){
 
         }
+
+    })
+}
+
+function deleteFromCart(cartId){
+    $.ajax({
+        url: "Action.php",
+        type: "POST",
+        data: {action: "deleteFromCart", cartIdKey: cartId},
+
+        success: function(response){
+            if(response){
+                alert ("Sikeres vásárlás!")
+                window.location.href="http://localhost/feladatok/%C3%9Aj%20mappa/pizzaWeb/?page=pizza";
+            }else{
+                alert("sikertelen vásárlás");
+            }
+           
+        },
+        error: function(xhr, error, errorMessage){
+
+        },
+
+
+
 
     })
 }

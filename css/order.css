@@ -25,9 +25,10 @@
 }
 
 .payButton{
-   background-color:rgb(247, 247, 0);
+   text-align: center;
+   background-color:rgb(209, 49, 49);
    border: 2px solid black;
-   width: 150px;
+   width: 200px;
    height: 20px;
    padding-bottom: 30px;
    border-radius: 10px;
