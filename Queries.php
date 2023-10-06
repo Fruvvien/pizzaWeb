@@ -153,6 +153,22 @@ class Queries{
         $result = $sql->execute();
         return $result;
     }
+    function plussing($cartId, $productId){
+        $sql = $this->db->conn->prepare("UPDATE cart_items SET quantity = quantity + 1 WHERE cart_id = :cartId AND product_id = :productId");
+        $sql->bindValue(":cartId", $cartId);
+        $sql->bindValue(":productId", $productId);
+        $result = $sql->execute();
+        return $result;
+        
+    }
+    function minus($cartId, $productId){
+        $sql = $this->db->conn->prepare("UPDATE cart_items SET quantity = quantity - 1 WHERE cart_id = :cartId AND product_id = :productId");
+        $sql->bindValue(":cartId", $cartId);
+        $sql->bindValue(":productId", $productId);
+        $result = $sql->execute();
+        return $result;
+        
+    }
     
 
 }

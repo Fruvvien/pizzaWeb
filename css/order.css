@@ -37,3 +37,8 @@
 .payButton:hover{
    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
+.quantityChanger{
+   border-radius: 10px;
+   width: 50px;
+   height: 20p;
+}

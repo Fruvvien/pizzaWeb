@@ -41,7 +41,7 @@ function orderList(){
                             "<button class='button' onclick='deleteFunction("+text.cart_items_id+","+text.cart_id+","+text.price+","+text.quantity+")'><img class='buttonImg' src='./img/DeleteButton.png'></button>"+
                             "<img class='img' id='pizzaImg' src='./"+text.url+text.filename+"."+text.filetype+"'>"+
                             "<div class='pizzaName' >"+text.pnev+"</div>" +
-                            "<div class='pizzaQuantity'>" +text.quantity+"</div>"+
+                            "<div class='pizzaQuantity'>" +text.quantity+"<button class='quantityChanger' onclick='quantityPluss("+text.cart_id+","+text.product_id+""+text.quantity+")' >+</button>"+"<button onclick='quantityMinus("+text.cart_id+","+text.product_id+""+text.quantity+")' class='quantityChanger'>-</button>"+"</div>"+
                             "<div class='pizzaPrice' >"+text.price+"</div>"+
                             
                     "</div>"
@@ -120,7 +120,7 @@ function deleteFromCart(cartId){
         success: function(response){
             if(response){
                 alert ("Sikeres vásárlás!")
-                window.location.href="http://localhost/feladatok/%C3%9Aj%20mappa/pizzaWeb/?page=pizza";
+                window.location.href="http://localhost/feladatok/pizzaWeb/?page=pizza";
             }else{
                 alert("sikertelen vásárlás");
             }
@@ -134,4 +134,61 @@ function deleteFromCart(cartId){
 
 
     })
+}
+
+function quantityPluss(cartId, productId){
+
+    
+    allId={
+        cartId: cartId,
+        productId: productId
+    
+    }
+
+
+
+    $.ajax({
+
+        url:"Action.php",
+        type:"POST",
+        data:{action: "quantityPlus", allData: allId},
+
+        success: function(response){
+            if(response){
+                location.reload();
+            }
+        },
+        error: function(xhr, error, errorMessage){
+
+        },
+
+
+    })
+}
+
+function quantityMinus(cartId, productId){
+   
+    allId={
+        cartId: cartId,
+        productId: productId
+        
+    }
+
+    $.ajax({
+        url:"Action.php",
+        type:"POST",
+        data:{action: "quantityMinus", allData: allId},
+
+        success: function(response){
+            if(response){
+                location.reload();
+            }
+            
+        },
+        error: function(xhr, error, errorMessage){
+
+        },
+
+    })
+        
 }
