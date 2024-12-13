@@ -25,7 +25,7 @@ registerAddEventListener.addEventListener("submit", (e) =>{
 
         success: function(response){
             if(response){
-                window.location.href="http://localhost/feladatok/pizzaWeb/?";
+                window.location.href="http://localhost/pizzaWeb/";
             }else{
                 alert("Sikertelen regisztráció");
                 console.log(response);

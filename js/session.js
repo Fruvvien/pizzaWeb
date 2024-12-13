@@ -54,7 +54,7 @@ logoutSessionUser.addEventListener("click", (e) =>{
 
         success: function(response){
            if(response){
-            window.location.href="http://localhost/feladatok/pizzaWeb/";
+            window.location.href="http://localhost/pizzaWeb/";
             document.getElementById("user").style.display="none";
             document.getElementById("adminNav").style.display="none";
            }
@@ -76,7 +76,7 @@ logoutSessionAdmin.addEventListener("click", (e) =>{
 
         success: function(response){
            if(response){
-            window.location.href="http://localhost/feladatok/pizzaWeb/";
+            window.location.href="http://localhost/pizzaWeb/";
             document.getElementById("user").style.display="none";
             document.getElementById("adminNav").style.display="none";
            }

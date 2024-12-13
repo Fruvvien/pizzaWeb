@@ -11,7 +11,7 @@ class Connection{
     function __construct(){
         try{
             $this->conn= new PDO($this->dbhost, $this->user, $this->password);
-        }catch(PDOExpection $e){
+        }catch(PDOException $e){
             echo $e;
         }
     

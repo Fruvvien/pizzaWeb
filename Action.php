@@ -92,7 +92,7 @@ if(isset($_POST["action"]) && $_POST["action"] == "courierlist"){
 if(isset($_POST["action"]) && $_POST["action"] == "order" && isset($_POST["pizzaKey"]) && isset($_SESSION["userId"])){
    $orderQueries = $queries->userIdFunction($_SESSION["userId"]);
    $existProduct = $queries->productFunction($_POST["pizzaKey"]["pizzaId"], $_POST["pizzaKey"]["pizzaAr"], $orderQueries);
-   $upgradeCart = $queries->upgradeCartFunction( $_POST["pizzaKey"]["pizzaAr"], $orderQueries, $_SESSION["userId"] );
+   $upgradeCart = $queries->upgradeCartFunction( $_POST["pizzaKey"]["pizzaAr"], $orderQueries, $_SESSION["userId"]);
    
    echo json_encode($orderQueries);
 
@@ -135,11 +135,45 @@ if(isset($_POST["action"]) && $_POST["action"] == "deleteFromCart" && isset($_PO
 }
 
 if(isset($_POST["action"]) && $_POST["action"] == "quantityPlus" && isset($_POST["allData"])){
-   $queries->plussing($_POST["allData"]["cartId"], $_POST["allData"]["productId"]);
+   $queries->plussing($_POST["allData"]["cartId"], $_POST["allData"]["productId"], $_POST["allData"]["quantity"]);
    echo true;
 }
 
 if(isset($_POST["action"]) && $_POST["action"] == "quantityMinus" && isset($_POST["allData"])){
-   $queries->minus($_POST["allData"]["cartId"], $_POST["allData"]["productId"]);
+   $queries->minus($_POST["allData"]["cartId"], $_POST["allData"]["productId"], $_POST["allData"]["quantity"]);
    echo true;
 }
+
+if(isset($_POST["action"]) && $_POST["action"] == "finalPricePlus" && isset($_POST["cartIdAndPrice"])){
+   $upgradeCart = $queries->plusFinalPrice(  $_POST["cartIdAndPrice"]["price"], $_POST["cartIdAndPrice"]["cartId"]);
+   echo true;
+}
+if(isset($_POST["action"]) && $_POST["action"] == "finalPriceMinus" && isset($_POST["cartIdAndPrice"])){
+   $upgradeCart = $queries->minusFinalPrice(  $_POST["cartIdAndPrice"]["price"], $_POST["cartIdAndPrice"]["cartId"]);
+   echo true;
+}
+
+if(isset($_POST["action"]) && $_POST["action"] == "clearTheBag" && isset($_POST["cartItemId"]) ){
+   $upgradeBag = $queries->clearTheBag(["cartItemId"]["cartItemId"]);
+   echo true;
+}
+
+if(isset($_POST["action"]) && $_POST["action"] == "deleteFromCartItemsWithWhere" && isset($_POST["cartItemId"]) ){
+   $deleteFromCartItemsWithWhere = $queries->deleteFromCartItemsWithWhere($_POST["cartItemId"], $_SESSION["userId"]);
+   echo true;
+}
+
+
+
+
+/* if (isset($_POST["action"]) && $_POST["action"] == "quantityPlus" && isset($_POST["allData"])) {
+   $data = json_decode($_POST["allData"], true); // JSON dekódolása tömbként
+   $queries->plussing($data["cartId"], $data["productId"], $data["quantity"]);
+   echo true;
+}
+
+if (isset($_POST["action"]) && $_POST["action"] == "quantityMinus" && isset($_POST["allData"])) {
+   $data = json_decode($_POST["allData"], true); // JSON dekódolása tömbként
+   $queries->minus($data["cartId"], $data["productId"], $data["quantity"]);
+   echo true;
+} */

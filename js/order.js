@@ -41,7 +41,7 @@ function orderList(){
                             "<button class='button' onclick='deleteFunction("+text.cart_items_id+","+text.cart_id+","+text.price+","+text.quantity+")'><img class='buttonImg' src='./img/DeleteButton.png'></button>"+
                             "<img class='img' id='pizzaImg' src='./"+text.url+text.filename+"."+text.filetype+"'>"+
                             "<div class='pizzaName' >"+text.pnev+"</div>" +
-                            "<div class='pizzaQuantity'>" +text.quantity+"<button class='quantityChanger' onclick='quantityPluss("+text.cart_id+","+text.product_id+""+text.quantity+")' >+</button>"+"<button onclick='quantityMinus("+text.cart_id+","+text.product_id+""+text.quantity+")' class='quantityChanger'>-</button>"+"</div>"+
+                            "<div class='pizzaQuantity'>" +text.quantity+"<button class='quantityChanger' onclick='quantityPluss("+text.cart_id+","+text.product_id+","+text.quantity+","+text.price+","+text.cart_items_id+")' >+</button>"+"<button onclick='quantityMinus("+text.cart_id+","+text.product_id+","+text.quantity+","+text.price+","+text.cart_items_id+")' class='quantityChanger'>-</button>"+"</div>"+
                             "<div class='pizzaPrice' >"+text.price+"</div>"+
                             
                     "</div>"
@@ -81,6 +81,7 @@ function deleteFunction(id, cartId, price, quantity){
 
         success: function(response){
             if(response){
+                deleteFromCart(cartId)
                 updateCart(cartId, price, quantity);
             }
         },
@@ -99,6 +100,7 @@ function updateCart(cartId, price, quantity){
         data: {action: "updateCart", cartKey: cartId, cartItemPrice: price, quantityKey: quantity},
 
         success: function(response){
+           
             if(response){
                
                 location.reload();
@@ -119,10 +121,10 @@ function deleteFromCart(cartId){
 
         success: function(response){
             if(response){
-                alert ("Sikeres vásárlás!")
-                window.location.href="http://localhost/feladatok/pizzaWeb/?page=pizza";
+                console.log(response)
+                window.location.href="http://localhost/pizzaWeb/?page=pizza";
             }else{
-                alert("sikertelen vásárlás");
+                
             }
            
         },
@@ -136,26 +138,75 @@ function deleteFromCart(cartId){
     })
 }
 
-function quantityPluss(cartId, productId){
-
-    
-    allId={
-        cartId: cartId,
-        productId: productId
-    
+function finalPricePlus(cartId, price){
+    cartIdAndPrice = {
+        cartId : cartId,
+        price: price
     }
-
-
-
     $.ajax({
 
         url:"Action.php",
         type:"POST",
-        data:{action: "quantityPlus", allData: allId},
+        data:{action: "finalPricePlus", cartIdAndPrice: cartIdAndPrice},
 
         success: function(response){
             if(response){
                 location.reload();
+                 
+            }
+        },
+        error: function(xhr, error, errorMessage){
+            console.log("nem sikerült");
+            
+        },
+
+
+    })
+
+}
+
+function finalPriceMinus(cartId, price){
+    cartIdAndPrice = {
+        cartId : cartId,
+        price: price
+    }
+    $.ajax({
+
+        url:"Action.php",
+        type:"POST",
+        data:{action: "finalPriceMinus", cartIdAndPrice: cartIdAndPrice},
+
+        success: function(response){
+            if(response){
+                location.reload();
+                 
+            }
+        },
+        error: function(xhr, error, errorMessage){
+            console.log("nem sikerült");
+            
+        },
+
+
+    })
+}
+
+function clearTheBag(cartItemId){
+   
+    $.ajax({
+
+        url:"Action.php",
+        type:"POST",
+        data:{action: "clearTheBag", cartItemId: cartItemId},
+       
+        
+        success: function(response){
+            if(response){
+                
+               
+                location.reload();
+                
+                
             }
         },
         error: function(xhr, error, errorMessage){
@@ -166,14 +217,81 @@ function quantityPluss(cartId, productId){
     })
 }
 
-function quantityMinus(cartId, productId){
-   
+
+function quantityPluss(cartId, productId,quantity, price, cartItemId){
+
+    
     allId={
         cartId: cartId,
-        productId: productId
-        
+        productId: productId,
+        quantity:quantity,
+        price: price
+    
     }
 
+
+    console.log(allId);
+    
+    $.ajax({
+
+        url:"Action.php",
+        type:"POST",
+        data:{action: "quantityPlus", allData: allId},
+
+        success: function(response){
+            if(response){
+                
+                finalPricePlus(cartId, price);
+                console.log(cartId, price);
+                
+                location.reload();
+                
+                
+            }
+        },
+        error: function(xhr, error, errorMessage){
+
+        },
+
+
+    })
+}
+
+function deleteFromCartItemsWithWhere(cartId){
+    $.ajax({
+        url: "Action.php",
+        type: "POST",
+        data: {action: "deleteFromCartItemsWithWhere", cartItemId: cartId},
+
+        success: function(response){
+            if(response){
+                
+               
+            }else{
+                
+            }
+           
+        },
+        error: function(xhr, error, errorMessage){
+
+        },
+
+
+
+
+    })
+}
+
+function quantityMinus(cartId, productId,quantity, price,cartItemId){
+    
+    allId={
+        cartId: cartId,
+        productId: productId,
+        quantity: quantity,
+        price: price
+        
+    }
+   
     $.ajax({
         url:"Action.php",
         type:"POST",
@@ -181,7 +299,19 @@ function quantityMinus(cartId, productId){
 
         success: function(response){
             if(response){
-                location.reload();
+                    if(quantity > 0){
+                        finalPriceMinus(cartId, price)
+                    }
+                    
+                    clearTheBag(cartItemId)
+                    deleteFromCartItemsWithWhere(cartId)
+                
+                console.log(cartItemId);
+            
+                
+               
+               
+                
             }
             
         },

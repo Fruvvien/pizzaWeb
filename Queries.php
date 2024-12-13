@@ -32,7 +32,7 @@ class Queries{
             $sql->execute();
             $result = $sql;
             return ["success" => true, "errorMessage" => "", "result" => $result];
-        }catch (PDOExpection $e){
+        }catch (PDOException $e){
             return ["success" => false, "errorMessage" => "$e", "result" => []];
         }
     }
@@ -153,22 +153,54 @@ class Queries{
         $result = $sql->execute();
         return $result;
     }
-    function plussing($cartId, $productId){
-        $sql = $this->db->conn->prepare("UPDATE cart_items SET quantity = quantity + 1 WHERE cart_id = :cartId AND product_id = :productId");
+    function plussing($cartId, $productId, $quantity){
+        $sql = $this->db->conn->prepare("UPDATE cart_items SET quantity = :quantity + 1 WHERE cart_id = :cartId AND product_id = :productId");
         $sql->bindValue(":cartId", $cartId);
         $sql->bindValue(":productId", $productId);
+        $sql->bindValue(":quantity", $quantity);
         $result = $sql->execute();
         return $result;
         
     }
-    function minus($cartId, $productId){
-        $sql = $this->db->conn->prepare("UPDATE cart_items SET quantity = quantity - 1 WHERE cart_id = :cartId AND product_id = :productId");
+    function minus($cartId, $productId, $quantity){
+        $sql = $this->db->conn->prepare("UPDATE cart_items SET quantity = :quantity - 1 WHERE cart_id = :cartId AND product_id = :productId AND quantity != 0 ");
         $sql->bindValue(":cartId", $cartId);
         $sql->bindValue(":productId", $productId);
+        $sql->bindValue(":quantity", $quantity);
         $result = $sql->execute();
         return $result;
         
     }
     
+    function plusFinalPrice( $price, $cartId){
+        $sql = $this->db->conn->prepare("UPDATE cart SET total_price = total_price + :price WHERE cart_id = :cartid ");
+        $sql->bindValue(":price", $price);
+        $sql->bindValue(":cartid", $cartId);
+        $result =  $sql->execute();
+        return $result;
+    }
+    function minusFinalPrice($price, $cartId){
+        $sql = $this->db->conn->prepare("UPDATE cart SET total_price = total_price - :price WHERE cart_id = :cartid  ");
+        $sql->bindValue(":price", $price);
+        $sql->bindValue(":cartid", $cartId);
+        $result =  $sql->execute();
+        return $result;
+    }
+
+    function clearTheBag($id){
+        $sql = $this->db->conn->prepare("DELETE FROM cart_items WHERE cart_items_id = :id AND quantity = 0");
+        $sql->bindValue(":id", $id);
+        $result =  $sql->execute();
+        
+        return $result;   
+    }
+
+    function deleteFromCartItemsWithWhere($id, $userId){
+        $sql = $this->db->conn->prepare("DELETE FROM cart WHERE cart_id = :id AND user_id = :userId AND total_price = 0");
+        $sql->bindValue(":id", $id);
+        $sql->bindValue(":userId", $userId);
+        $result = $sql->execute();
+        return $result;
+    }
 
 }
