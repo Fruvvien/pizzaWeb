@@ -114,8 +114,8 @@ if(isset($_POST["action"]) && $_POST["action"] == "orderPage" ){
    }
 }
 
-if(isset($_POST["action"]) && $_POST["action"] == "deleteFunctionButton" && isset($_POST["cartItemKey"])){
-   $deleteQueries = $queries->deleteCartItem($_POST["cartItemKey"]);
+if(isset($_POST["action"]) && $_POST["action"] == "deleteFunctionButton" && isset($_POST["cartItemKey"]) && isset($_POST["cartKey"])){
+   $deleteQueries = $queries->deleteCartItem($_POST["cartItemKey"], $_POST["cartKey"]);
    echo $deleteQueries;
 }
 
@@ -153,8 +153,8 @@ if(isset($_POST["action"]) && $_POST["action"] == "finalPriceMinus" && isset($_P
    echo true;
 }
 
-if(isset($_POST["action"]) && $_POST["action"] == "clearTheBag" && isset($_POST["cartItemId"]) ){
-   $upgradeBag = $queries->clearTheBag(["cartItemId"]["cartItemId"]);
+if(isset($_POST["action"]) && $_POST["action"] == "clearTheBag" && isset($_POST["cartItemId"]) && isset($_POST["cartId"])  ){
+   $upgradeBag = $queries->clearTheBag(["cartItemId"]["cartItemId"], ["cartId"]["cartId"]);
    echo true;
 }
 

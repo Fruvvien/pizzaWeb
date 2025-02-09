@@ -77,11 +77,12 @@ function deleteFunction(id, cartId, price, quantity){
     $.ajax({
         url: "Action.php",
         type:"POST",
-        data: {action: "deleteFunctionButton", cartItemKey: id},
-
+        data: {action: "deleteFunctionButton", cartItemKey: id, cartKey: cartId},
+        
         success: function(response){
+            
             if(response){
-                deleteFromCart(cartId)
+            
                 updateCart(cartId, price, quantity);
             }
         },
@@ -121,6 +122,7 @@ function deleteFromCart(cartId){
 
         success: function(response){
             if(response){
+                alert("Sikeres vásárlás!");
                 console.log(response)
                 window.location.href="http://localhost/pizzaWeb/?page=pizza";
             }else{
@@ -191,13 +193,13 @@ function finalPriceMinus(cartId, price){
     })
 }
 
-function clearTheBag(cartItemId){
+function clearTheBag(cartItemId, cartId){
    
     $.ajax({
 
         url:"Action.php",
         type:"POST",
-        data:{action: "clearTheBag", cartItemId: cartItemId},
+        data:{action: "clearTheBag", cartItemId: cartItemId, cartId: cartId},
        
         
         success: function(response){
@@ -303,7 +305,7 @@ function quantityMinus(cartId, productId,quantity, price,cartItemId){
                         finalPriceMinus(cartId, price)
                     }
                     
-                    clearTheBag(cartItemId)
+                    clearTheBag(cartItemId, cartId);
                     deleteFromCartItemsWithWhere(cartId)
                 
                 console.log(cartItemId);

@@ -122,9 +122,10 @@ class Queries{
         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
-    function deleteCartItem($id){
-        $sql = $this->db->conn->prepare("DELETE FROM cart_items WHERE cart_items_id = :id");
+    function deleteCartItem($id, $cartId){
+        $sql = $this->db->conn->prepare("DELETE FROM cart_items WHERE cart_items_id = :id AND cart_id = :cartId");
         $sql->bindValue(":id", $id);
+        $sql->bindValue(":cartId", $cartId);
         $result =  $sql->execute();
         return $result;    
     }
@@ -187,9 +188,10 @@ class Queries{
         return $result;
     }
 
-    function clearTheBag($id){
-        $sql = $this->db->conn->prepare("DELETE FROM cart_items WHERE cart_items_id = :id AND quantity = 0");
+    function clearTheBag($id, $cartId){
+        $sql = $this->db->conn->prepare("DELETE FROM cart_items WHERE cart_items_id = :id AND cart_id = :cartId AND quantity = 0");
         $sql->bindValue(":id", $id);
+        $sql->bindValue(":cartId", $cartId);
         $result =  $sql->execute();
         
         return $result;   
